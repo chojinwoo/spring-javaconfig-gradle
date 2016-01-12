@@ -39,19 +39,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**");
+                .antMatchers("/resources/**/*", "/join");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests().anyRequest().authenticated()
-                .and().csrf().disable()
+                .and()
+                .csrf().disable()
                 .formLogin().failureUrl("/")
                 .defaultSuccessUrl("/main")
-                .loginProcessingUrl("/login").passwordParameter("password").usernameParameter("id")
-                .loginPage("/")
-                .permitAll()
+                .loginProcessingUrl("/login")
+                .passwordParameter("password").usernameParameter("id")
+                .loginPage("/").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
                 .permitAll();

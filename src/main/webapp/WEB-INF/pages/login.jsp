@@ -23,7 +23,7 @@
 <body>
 <div class="container">
 
-    <form class="form-signin" action="/login" method="post">
+    <form class="form-signin" action="/login" method="post" style="padding: 30px 20% 0px 20%;">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
@@ -39,9 +39,19 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" id="signBtn" type="button">Sign in</button>
+        <button class="btn btn-lg btn-success btn-block" id="joinBtn" type="button">Join</button>
     </form>
 
 </div> <!-- /container -->
+<script>
+    $('#signBtn').on('click', function() {
+        $('.form-signin').submit();
+    })
+
+    $('#joinBtn').on('click', function() {
+        $(location).attr('href','/join');
+    })
+</script>
 </body>
 </html>
