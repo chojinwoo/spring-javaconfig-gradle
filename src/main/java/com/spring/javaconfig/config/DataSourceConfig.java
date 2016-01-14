@@ -1,6 +1,7 @@
 package com.spring.javaconfig.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.dialect.Oracle12cDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -41,7 +42,7 @@ public class DataSourceConfig {
         dataSource.setMaxActive(100);
         dataSource.setMaxWait(10000);
         dataSource.setInitialSize(10);
-        dataSource.setValidationQuery("select 1 from dual");
+//        dataSource.setValidationQuery("select 1 from dual");
         return dataSource;
     }
 
@@ -71,7 +72,7 @@ public class DataSourceConfig {
 
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        jpaProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
         factory.setJpaProperties(jpaProperties);
         factory.afterPropertiesSet();
         factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());

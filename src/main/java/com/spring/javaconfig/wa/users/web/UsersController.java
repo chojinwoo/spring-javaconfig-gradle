@@ -20,9 +20,10 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    @RequestMapping("/saveJoin")
-    public String saveJoin(@ModelAttribute("users")Users users, Model model) {
-        System.out.println(users.getEmail());
-        return "/";
+    @RequestMapping("/save")
+    public String saveJoin(@ModelAttribute("users")Users user, Model model) {
+        System.out.println(user.getName() + "##########################");
+        this.usersService.save(user);
+        return "redirect:/";
     }
 }

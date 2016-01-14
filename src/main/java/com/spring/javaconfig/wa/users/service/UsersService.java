@@ -7,4 +7,5 @@ import com.spring.javaconfig.wa.users.entity.Users;
  */
 public interface UsersService {
     public Users findEmail(String email);
+    public Users save(Users user);
 }

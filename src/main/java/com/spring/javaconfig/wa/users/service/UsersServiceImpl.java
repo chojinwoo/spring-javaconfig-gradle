@@ -1,10 +1,12 @@
 package com.spring.javaconfig.wa.users.service;
 
+import com.spring.javaconfig.common.util.EncryptUtil;
 import com.spring.javaconfig.wa.users.dao.UsersDao;
 import com.spring.javaconfig.wa.users.entity.Users;
 import com.spring.javaconfig.wa.users.entity.UsersAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,5 +49,23 @@ public class UsersServiceImpl implements UserDetailsService, UsersService {
     @Override
     public Users findEmail(String email) {
         return null;
+    }
+
+    @Override
+    @Transactional
+    public Users save(Users user) {
+        String pwd = user.getPassword();
+        user.setPassword(EncryptUtil.encrypt(pwd));
+
+        Users getUser = usersDao.save(user);
+        if(getUser.getEmail().equals(user.getEmail())) {
+            UsersAuth auth = new UsersAuth();
+            auth.setEmail(user.getEmail());
+            auth.setAuthority("ROLE_USER");
+            this.usersDao.saveAuth(auth);
+            return getUser;
+        } else {
+            return null;
+        }
     }
 }

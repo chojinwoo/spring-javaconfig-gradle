@@ -37,7 +37,8 @@ public class WebInitializer implements WebApplicationInitializer {
 
     public void encodingFilter(ServletContext servletContext) {
         FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
-        EnumSet<DispatcherType> set = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
-        filter.addMappingForUrlPatterns(set,false, "/*");
+        filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+        filter.setInitParameter("encoding", "UTF-8");
+        filter.setInitParameter("forceEncoding", "true");
     }
 }

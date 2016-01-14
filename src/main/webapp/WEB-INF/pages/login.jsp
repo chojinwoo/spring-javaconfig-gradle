@@ -16,8 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="/resources/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-2.2.0.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
     <title>Title</title>
 </head>
 <body>

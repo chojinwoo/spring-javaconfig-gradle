@@ -14,6 +14,8 @@ public class UsersAuth {
 
     @Id
     @Column(name = "seq", nullable = false)
+    @SequenceGenerator(name = "seq", sequenceName = "users_auth_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
     public int getSeq() {
         return seq;
     }
